@@ -1,6 +1,6 @@
 <?php if (!defined('APPLICATION')) exit();
 
-$PluginInfo['VanillaInThisDiscussion'] = array(
+$PluginInfo['UserMap'] = array(
     'Name' => 'User Map',
     'Description' => "Shows a map with a marker for geolocation of all active users",
     'Version' => '0.01',
