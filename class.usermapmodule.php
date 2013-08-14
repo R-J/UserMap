@@ -1,6 +1,6 @@
 <?php if (!defined('APPLICATION')) exit();
 
-define("SPACER_WIDTH", 0.005);
+define("SPACER_WIDTH", 0);
 
 /**
  * Show all Users on a map
@@ -40,10 +40,10 @@ class UserMapModule extends Gdn_Module {
       $MapInfo = UserMapModel::GetMapInfo();
       
       // define how much more of the map is shown than the upper and lower most user
-      $MinLatitude = $MapInfo->MinLat - SPACER_WDTH;
-      $MaxLatitude = $MapInfo->MaxLat + SPACER_WDTH;
-      $MinLongitude = $MapInfo->MinLong - SPACER_WDTH;
-      $MaxLongitude = $MapInfo->MaxLong + SPACER_WDTH;
+      $MinLatitude = $MapInfo->MinLat - SPACER_WIDTH;
+      $MaxLatitude = $MapInfo->MaxLat + SPACER_WIDTH;
+      $MinLongitude = $MapInfo->MinLong - SPACER_WIDTH;
+      $MaxLongitude = $MapInfo->MaxLong + SPACER_WIDTH;
       
       $Min = new MMaps_Location($MinLatitude, $MinLongitude);
       $Max = new MMaps_Location($MaxLatitude, $MaxLongitude);
@@ -63,7 +63,7 @@ class UserMapModule extends Gdn_Module {
       }
 
       // and save it as an image
-      imagepng($MMImage, PATH_PLUGINS.DS.'UserMap'.DS.'design'.DS.'usermap.png');
+      imagejpeg($MMImage, PATH_PLUGINS.DS.'UserMap'.DS.'design'.DS.'usermap.jpg');
 
    } // End of DrawMap   
    
@@ -73,7 +73,7 @@ class UserMapModule extends Gdn_Module {
     *  
     */
    public function ToString() {
-      $imagefile = PATH_PLUGINS.DS.'UserMap'.DS.'design'.DS.'usermap.png';
+      $imagefile = PATH_PLUGINS.DS.'UserMap'.DS.'design'.DS.'usermap.jpg';
       // check if file already exists and only redraw if it is too old
       if (!file_exists($imagefile) OR (time() - filectime($imagefile) > C('Plugins.UserMap.UpdateInterval'))) {
          // get geo ip information
@@ -85,7 +85,7 @@ class UserMapModule extends Gdn_Module {
 <div class="Box">
    <h4><?php echo T('User Map'); ?></h4>
    <div id="UserMapContainer">
-      <img src="/plugins/UserMap/design/usermap.png" alt="usermap" />
+      <img src="/plugins/UserMap/design/usermap.jpg" alt="usermap" />
    </div>
 </div>
 <?php
